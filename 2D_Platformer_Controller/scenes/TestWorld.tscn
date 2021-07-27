@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/KinematicBody2D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 571, 82 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 32 )
+
+[node name="TestWorld" type="Node2D"]
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2( 498, 477 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Floor"]
+scale = Vector2( 18, 2.5 )
+texture = ExtResource( 2 )
+
+[node name="KinematicBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 489, 189 )
+
+[node name="Obstacle" type="StaticBody2D" parent="."]
+position = Vector2( 184.138, 362.324 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Obstacle"]
+modulate = Color( 0.00392157, 0.282353, 0, 1 )
+texture = ExtResource( 2 )
+
+[node name="Obstacle2" type="StaticBody2D" parent="."]
+position = Vector2( 134.188, 296.66 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle2"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Obstacle2"]
+modulate = Color( 0.00392157, 0.282353, 0, 1 )
+texture = ExtResource( 2 )
