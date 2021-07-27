@@ -1,0 +1,45 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://src/Bullet.gd"
+}, {
+"base": "StaticBody2D",
+"class": "Obstacle",
+"language": "GDScript",
+"path": "res://src/Obstacle.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://src/Player.gd"
+} ]
+_global_script_class_icons={
+"Bullet": "",
+"Obstacle": "",
+"Player": ""
+}
+
+[application]
+
+config/name="2D Basic Top Down"
+run/main_scene="res://scenes/TestWorld.tscn"
+config/icon="res://icon.png"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
