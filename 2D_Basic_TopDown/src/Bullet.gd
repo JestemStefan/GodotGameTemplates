@@ -15,11 +15,18 @@ func _physics_process(delta):
 func _on_Bullet_body_entered(body):
 	
 	# we will check what type of object bullet hit and decide what to do
-	match body.get_script():
-		# if body that bullet hit is obstacle
-		Obstacle:
-			# then delete this body. "call_defered" is used to delete nodes safely.
-			(body as Obstacle).call_deferred("free")
 	
-	# Also delete the bullet
+	# if bullet hits obstacle
+	if body is Obstacle:
+		# then do nothing since I don't want obstacle to be destroyed
+		pass
+	
+	# if body hits Enemy
+	if body is Enemy:
+		
+		# then enemy will take damage
+		(body as Enemy).take_damage()
+	
+	
+	# Also delete the bullet at the end
 	call_deferred("free")

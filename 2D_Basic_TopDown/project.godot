@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Bullet.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://src/Enemy.gd"
+}, {
 "base": "StaticBody2D",
 "class": "Obstacle",
 "language": "GDScript",
@@ -26,6 +31,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Bullet": "",
+"Enemy": "",
 "Obstacle": "",
 "Player": ""
 }
@@ -34,7 +40,12 @@ _global_script_class_icons={
 
 config/name="2D Basic Top Down"
 run/main_scene="res://scenes/TestWorld.tscn"
-config/icon="res://icon.png"
+config/icon="res://art/2D/icon.png"
+
+[display]
+
+window/size/width=640
+window/size/height=640
 
 [physics]
 
@@ -42,4 +53,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/filters/anisotropic_filter_level=16
 environment/default_environment="res://default_env.tres"
