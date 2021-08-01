@@ -28,6 +28,9 @@ func _physics_process(delta):
 	var new_velocity: Vector2 = Vector2.ZERO
 	
 	# # this sets direction when you press arrow keys.
+	
+	# -------------IF YOU ARE USING VERSION 3.3 OR EARLIER THEN YOU CAN USE THIS ------
+	
 	# Input.get_action_strength() gives 1 when you press button and 0 if you don't
 	# So if you press just right it will be 1 - 0 = 1 --> going right
 	# if you press left: 0 - 1 = -1 --> going left
@@ -37,6 +40,10 @@ func _physics_process(delta):
 	direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	# up and down will be used for going forward and backward
 	direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	
+	# -------------IF YOU ARE USING VERSION 3.4 OR LATER THEN YOU CAN USE THIS INSTEAD ------
+	# Input.get_vector() will take a direction of input so it will be in up direction if you press up 
+	#direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
 	# set character new velocity to input direction multiplied by speed
 	# lerp is used to make smooth acceleration from previous velocity to new velocity
