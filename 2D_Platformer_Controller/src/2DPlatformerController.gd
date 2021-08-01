@@ -20,7 +20,7 @@ var jumpChargesLeft: int = MAX_JUMP_CHARGES
 # this makes game feel good
 # jump buffer checks if player pressed jump button recently.
 # It will make character jump even if character wasn't on floor while player pressed button
-const JUMP_BUFFER_LENGTH: float = 0.3
+const JUMP_BUFFER_LENGTH: float = 0.2
 var jump_buffer: float = 0
 
 # coyote time! We will use this to let player jump even if he is not on platform anymore
@@ -41,11 +41,18 @@ func _physics_process(delta):
 	var direction: Vector2 = Vector2.ZERO
 	
 	# this sets left/right direction when you press left/right arrow.
+	# ------IF YOU USE 3.3 VERSION THEN USE THIS -----------------------------
 	# Input.get_action_strength() gives 1 when you press button and 0 if you don't
 	# So if you press just right it will be 1 - 0 = 1 --> going right
 	# if you press left: 0 - 1 = -1 --> going left
 	# if both left and right will be pressed then 1 - 1 = 0 --> no movement
 	direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	
+	#----------------- IF YOU USE 3.4 VERSION THEN USE THIS ----------------------
+	# it will return -1 when first input ("ui_left") is pressed and 1 if second one ("ui_right") is pressed.
+	# it will return 0 if both are pressed at the same time.
+	# uncomment line (remove #) below to enable it
+	#direction.x = Input.get_axis("ui_left", "ui_right")
 	
 	# check if player landed on the ground and if he does then he can jump again
 	if floor_ray.is_colliding():
