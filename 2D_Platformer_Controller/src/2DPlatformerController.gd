@@ -10,9 +10,6 @@ const ACCELERATION: float = 0.2
 # make it bigger and it will fall faster and feel heavier
 var gravity: float = 1500
 
-# We will use Raycast2D node to detect collision with the floor.
-onready var floor_ray: RayCast2D = $FloorRay
-
 # Used to check how many times player can jump. 2 = double jump. 1 single jump. 0 = can't jump
 const MAX_JUMP_CHARGES: int = 1
 var jumpChargesLeft: int = MAX_JUMP_CHARGES
@@ -55,7 +52,8 @@ func _physics_process(delta):
 	#direction.x = Input.get_axis("ui_left", "ui_right")
 	
 	# check if player landed on the ground and if he does then he can jump again
-	if floor_ray.is_colliding():
+	print(is_on_floor())
+	if is_on_floor():
 		jumpChargesLeft = MAX_JUMP_CHARGES
 		coyote_time_buffer = COYOTE_TIME_LENGTH
 	# if player is not on ground then lower coyote time
@@ -89,4 +87,4 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	
 	# apply all input changes to velocity
-	velocity = move_and_slide(velocity)
+	velocity = move_and_slide(velocity, Vector2.UP)
