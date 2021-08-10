@@ -74,7 +74,7 @@ func _physics_process(delta):
 		if jumpChargesLeft > 0 and coyote_time_buffer > 0:
 			
 			velocity.y = JUMP_FORCE # add force up to jump
-			jumpChargesLeft -= 1 * delta 	# use one of jump charges
+			jumpChargesLeft -= 1 	# use one of jump charges
 			jump_buffer = 0			# jump buffer is used up to reset to 0
 		
 		# if player can't jump then reduce jump buffer
