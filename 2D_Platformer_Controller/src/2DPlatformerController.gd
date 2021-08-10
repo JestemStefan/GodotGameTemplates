@@ -52,7 +52,6 @@ func _physics_process(delta):
 	#direction.x = Input.get_axis("ui_left", "ui_right")
 	
 	# check if player landed on the ground and if he does then he can jump again
-	print(is_on_floor())
 	if is_on_floor():
 		jumpChargesLeft = MAX_JUMP_CHARGES
 		coyote_time_buffer = COYOTE_TIME_LENGTH
