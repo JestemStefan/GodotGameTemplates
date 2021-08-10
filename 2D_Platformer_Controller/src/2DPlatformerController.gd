@@ -11,7 +11,7 @@ const ACCELERATION: float = 0.2
 var gravity: float = 1500
 
 # Used to check how many times player can jump. 2 = double jump. 1 single jump. 0 = can't jump
-const MAX_JUMP_CHARGES: int = 1
+const MAX_JUMP_CHARGES: int = 3
 var jumpChargesLeft: int = MAX_JUMP_CHARGES
 
 # this makes game feel good
@@ -26,6 +26,8 @@ var coyote_time_buffer: float = 0
 
 # this value is how high your player will jump. Must be minus value
 const JUMP_FORCE: float = -500.0
+
+var isInAir: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -53,10 +55,12 @@ func _physics_process(delta):
 	
 	# check if player landed on the ground and if he does then he can jump again
 	if is_on_floor():
+		isInAir = false
 		jumpChargesLeft = MAX_JUMP_CHARGES
 		coyote_time_buffer = COYOTE_TIME_LENGTH
 	# if player is not on ground then lower coyote time
 	else:
+		isInAir = true
 		coyote_time_buffer -= 1 * delta
 	
 	# check if player pressed jump button and if he does then add coyote time
@@ -68,12 +72,12 @@ func _physics_process(delta):
 	# if jump buffer is activated
 	if jump_buffer > 0:
 		# if player didn't jump yet and he was on a the ground
-		if jumpChargesLeft > 0 and coyote_time_buffer > 0:
+		if jumpChargesLeft > 0 and (coyote_time_buffer > 0 or isInAir):
 			
 			velocity.y = JUMP_FORCE # add force up to jump
 			jumpChargesLeft -= 1 	# use one of jump charges
 			jump_buffer = 0			# jump buffer is used up to reset to 0
-		
+	
 		# if player can't jump then reduce jump buffer
 		else:
 			jump_buffer -= 1 * delta
