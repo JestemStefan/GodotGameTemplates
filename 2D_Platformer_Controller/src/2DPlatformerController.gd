@@ -11,7 +11,7 @@ const ACCELERATION: float = 0.2
 var gravity: float = 1500
 
 # Used to check how many times player can jump. 2 = double jump. 1 single jump. 0 = can't jump
-const MAX_JUMP_CHARGES: int = 3
+const MAX_JUMP_CHARGES: int = 1
 var jumpChargesLeft: int = MAX_JUMP_CHARGES
 
 # this makes game feel good
@@ -60,7 +60,8 @@ func _physics_process(delta):
 		coyote_time_buffer = COYOTE_TIME_LENGTH
 	# if player is not on ground then lower coyote time
 	else:
-		isInAir = true
+		if MAX_JUMP_CHARGES > 1:
+			isInAir = true
 		coyote_time_buffer -= 1 * delta
 	
 	# check if player pressed jump button and if he does then add coyote time
